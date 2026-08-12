@@ -18,12 +18,20 @@ export default function Home() {
 
   const visibleProducts = useMemo(() => {
     const q = search.trim().toLowerCase();
-    const filtered = q
-      ? PRODUCTS.filter((p) => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q))
-      : PRODUCTS;
-    const popular = q ? filtered : PRODUCTS.filter((p) => p.popular);
-    return popular.length ? popular : filtered;
-  }, [search]);
+    let list = PRODUCTS.filter(
+      (p) => p.category === activeCat || activeCat === "All",
+    );
+    if (q) {
+      list = list.filter(
+        (p) =>
+          p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q),
+      );
+    } else {
+      const popular = list.filter((p) => p.popular);
+      if (popular.length) return popular;
+    }
+    return list;
+  }, [search, activeCat]);
 
   return (
     <div className="screen-in">
@@ -31,7 +39,7 @@ export default function Home() {
 
       <section className="mt-2 flex items-end justify-between px-5">
         <div>
-          <p className="overline-label">Freshly roasted</p>
+          <p className="overline-label">{activeCat === "All" ? "Everything" : activeCat}</p>
           <h2 className="font-display mt-1 text-2xl font-semibold text-foreground">
             Popular now
           </h2>
@@ -48,9 +56,11 @@ export default function Home() {
         <CategoryTabs categories={CATEGORIES} active={activeCat} onChange={setActiveCat} />
       </div>
 
-      {search.trim() && (
+      {(search.trim() || activeCat !== "All") && (
         <p className="px-5 pt-4 text-sm text-muted-foreground">
-          {visibleProducts.length} result{visibleProducts.length === 1 ? "" : "s"} for “{search.trim()}”
+          {visibleProducts.length} result{visibleProducts.length === 1 ? "" : "s"}
+          {search.trim() && ` for “${search.trim()}”`}
+          {activeCat !== "All" && !search.trim() && ` in ${activeCat}`}
         </p>
       )}
 

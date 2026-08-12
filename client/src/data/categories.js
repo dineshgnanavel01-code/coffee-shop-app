@@ -3,6 +3,7 @@
  * Each category carries a Lucide icon name used by CategoryTabs and Menu.
  */
 export const CATEGORIES = [
+  { id: "All", label: "All", icon: "Coffee" },
   { id: "Coffee", label: "Coffee", icon: "Coffee" },
   { id: "Tea", label: "Tea", icon: "Tea" },
   { id: "Cold Drinks", label: "Cold Drinks", icon: "Snowflake" },

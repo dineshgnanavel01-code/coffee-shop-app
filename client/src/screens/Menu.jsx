@@ -28,7 +28,7 @@ export default function Menu() {
     });
   }, [search, activeCat]);
 
-  const tabs = [{ id: "All", label: "All", icon: "Coffee" }, ...CATEGORIES];
+  const tabs = CATEGORIES;
 
   return (
     <div className="screen-in">
