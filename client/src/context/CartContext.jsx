@@ -11,6 +11,7 @@ const CartContext = createContext(null);
 
 export function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(true); // demo: start signed in
   const [favorites, setFavorites] = useState([1, 5]); // demo: pre-selected favorites
   const [orders] = useState([
     {
@@ -82,6 +83,17 @@ export function CartProvider({ children }) {
     toast.success("Order placed!", { description: "Your ritual is being prepared." });
   }, []);
 
+  const login = useCallback(() => {
+    setIsLoggedIn(true);
+    toast.success("Welcome back!", { description: "Sarah, your ritual awaits." });
+  }, []);
+
+  const logout = useCallback(() => {
+    setIsLoggedIn(false);
+    setCartItems([]);
+    toast("Logged out", { description: "Until the next brew, Sarah." });
+  }, []);
+
   const toggleFavorite = useCallback((productId) => {
     setFavorites((prev) =>
       prev.includes(productId)
@@ -98,6 +110,7 @@ export function CartProvider({ children }) {
   const value = useMemo(
     () => ({
       cartItems,
+      isLoggedIn,
       favorites,
       orders,
       addToCart,
@@ -105,9 +118,11 @@ export function CartProvider({ children }) {
       removeItem,
       clearCart,
       toggleFavorite,
+      login,
+      logout,
       cartCount,
     }),
-    [cartItems, favorites, orders, addToCart, updateQty, removeItem, clearCart, toggleFavorite, cartCount],
+    [cartItems, isLoggedIn, favorites, orders, addToCart, updateQty, removeItem, clearCart, toggleFavorite, login, logout, cartCount],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

@@ -4,7 +4,7 @@
  * toggles, and a quiet logout action.
  */
 import { useMemo, useState } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import {
   ArrowLeft,
   LogOut,
@@ -26,7 +26,8 @@ const SETTINGS = [
 ];
 
 export default function Profile() {
-  const { favorites, orders } = useCart();
+  const [, navigate] = useLocation();
+  const { favorites, orders, logout } = useCart();
   const [settings, setSettings] = useState(
     SETTINGS.reduce((acc, s) => ({ ...acc, [s.id]: s.defaultOn }), {}),
   );
@@ -178,9 +179,10 @@ export default function Profile() {
       {/* Logout */}
       <button
         type="button"
-        onClick={() =>
-          toast("Logged out", { description: "Until the next brew, Sarah." })
-        }
+        onClick={() => {
+          logout();
+          navigate("/login");
+        }}
         className="press mt-6 flex w-full items-center justify-center gap-2 rounded-full border border-border px-5 py-3.5 text-sm font-semibold text-foreground transition-colors hover:border-destructive/50 hover:text-destructive"
       >
         <LogOut className="h-4 w-4" />
