@@ -1,0 +1,107 @@
+/*
+ * Dina Coffee Shop — Cream & Craft editorial theme
+ * Warm cream canvas, espresso ink, caramel accent.
+ * Fonts: Fraunces (display serif) + Outfit (body sans).
+ */
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --color-paper: oklch(0.972 0.012 85);
+  --color-cream: oklch(0.985 0.008 85);
+  --color-espresso: oklch(0.24 0.02 50);
+  --color-caramel: oklch(0.62 0.12 55);
+  --color-toffee: oklch(0.78 0.07 70);
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-paper);
+    color: var(--color-espresso);
+    -webkit-font-smoothing: antialiased;
+  }
+  .font-display {
+    font-family: var(--font-display);
+  }
+  button, [role="button"], a {
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  .overline-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--color-caramel);
+  }
+
+  /* Mobile-first phone frame on desktop */
+  .phone-frame {
+    width: 100%;
+    max-width: 430px;
+    min-height: 100vh;
+    margin: 0 auto;
+    background: var(--color-cream);
+    box-shadow: 0 0 60px oklch(0.4 0.02 50 / 12%);
+    position: relative;
+  }
+  @media (min-width: 431px) {
+    .phone-frame {
+      min-height: 0;
+      margin: 2rem auto;
+      border-radius: 2.5rem;
+      border: 1px solid oklch(0.9 0.01 85);
+      overflow: hidden;
+    }
+    body {
+      background: var(--color-paper);
+    }
+  }
+
+  .screen-in {
+    animation: screenIn 0.25s cubic-bezier(0.23, 1, 0.32, 1) both;
+  }
+  @keyframes screenIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card-in {
+    animation: cardIn 0.35s cubic-bezier(0.23, 1, 0.32, 1) both;
+  }
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .warm-shadow {
+    box-shadow: 0 2px 10px oklch(0.4 0.02 50 / 8%);
+  }
+
+  .press {
+    transition: transform 0.16s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .press:active {
+    transform: scale(0.97);
+  }
+
+  /* Hide scrollbar on horizontal category row */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Staggered grid entrance */
+  .stagger > *:nth-child(1) { animation-delay: 0ms; }
+  .stagger > *:nth-child(2) { animation-delay: 60ms; }
+  .stagger > *:nth-child(3) { animation-delay: 120ms; }
+  .stagger > *:nth-child(4) { animation-delay: 180ms; }
+  .stagger > *:nth-child(5) { animation-delay: 240ms; }
+  .stagger > *:nth-child(6) { animation-delay: 300ms; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screen-in, .card-in { animation: none; }
+}

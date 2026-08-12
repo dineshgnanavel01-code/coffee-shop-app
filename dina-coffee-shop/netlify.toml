@@ -1,0 +1,22 @@
+# Netlify configuration for the Coffee Shop Mobile App
+# Vite in this project outputs the static build to `dist`.
+# Netlify auto-reads this file, so no dashboard settings are needed.
+
+[build]
+  # If you import the GitHub repo (not a parent folder), Base directory stays blank.
+  # If your imported repo contains a `coffee-shop-app/` subfolder, set:
+  #   base = "coffee-shop-app"
+  command = "pnpm install && pnpm run build"
+  publish = "dist"
+
+# SPA: all app routes (like /menu, /product/1) resolve to index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Exclude dev-only paths that don't exist in production builds
+[[redirects]]
+  from = "/__manus__/*"
+  to = "/index.html"
+  status = 404
