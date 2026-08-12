@@ -6,7 +6,7 @@
 export default function ProfileCard({
   name = "Sarah Miller",
   tier = "Gold Member",
-  avatar = "/manus-storage/logo-mark_30cba49d.png",
+  avatar = "/images/logo-mark_30cba49d.png",
   points = 1240,
   orders = 23,
 }) {

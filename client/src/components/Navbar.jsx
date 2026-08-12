@@ -15,7 +15,7 @@ export default function Navbar({ search, onSearch }) {
       <div className="flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5 group">
           <img
-            src="/manus-storage/logo-mark_30cba49d.png"
+            src="/images/logo-mark_30cba49d.png"
             alt="Roast & Ritual logo"
             className="h-11 w-11 object-contain transition-transform duration-200 group-hover:scale-105"
           />

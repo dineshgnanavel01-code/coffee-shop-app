@@ -66,7 +66,7 @@ On [vercel.com/new](https://vercel.com/new) import the GitHub repository and set
 
 ## Notes
 
-- Images are generated brand assets served via the dev storage proxy (`/manus-storage/...`). On external hosts (Netlify/Vercel) these proxy paths are unavailable; if any photo appears broken, host the images in your own repo (e.g., `public/images/`) and update the `image` field in `client/src/data/products.js`.
+- All images are stored locally in `client/public/images/` and referenced with relative paths (`/images/...`), so they work on any host (Netlify, Vercel, or the built-in Manus hosting). No image configuration is needed.
 - The demo starts signed in. Logout is on the Profile screen and navigates to the login page.
 - Cart and favorites reset on logout (demo behavior).
 

@@ -30,7 +30,7 @@ export default function Login() {
         <div className="flex flex-col items-center text-center">
           <div className="grid h-20 w-20 place-items-center rounded-3xl bg-card warm-shadow">
             <img
-              src="/manus-storage/logo-mark_30cba49d.png"
+              src="/images/logo-mark_30cba49d.png"
               alt="Roast & Ritual logo"
               className="h-14 w-14 object-contain"
             />
