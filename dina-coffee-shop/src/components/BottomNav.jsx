@@ -14,7 +14,7 @@ const LINKS = [
 ];
 
 export default function BottomNav() {
-  const [location] = useLocation();
+  const location = useLocation().pathname;
   const { cartCount } = useCart();
 
   return (
@@ -29,7 +29,7 @@ export default function BottomNav() {
           return (
             <Link
               key={href}
-              href={href}
+              to={href}
               className={`press relative flex flex-1 flex-col items-center gap-0.5 rounded-full py-1.5 text-xs font-medium transition-colors duration-200 ${
                 active
                   ? "text-caramel"

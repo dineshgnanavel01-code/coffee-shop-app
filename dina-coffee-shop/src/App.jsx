@@ -17,7 +17,7 @@ import Login from "./screens/Login";
 const PROTECTED = ["/menu", "/cart", "/profile", "/product"];
 
 function useAuthGuard() {
-  const location = useLocation();
+  const location = useLocation().pathname;
   const { isLoggedIn } = useCart();
 
   if (
